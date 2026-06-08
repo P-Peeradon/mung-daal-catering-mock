@@ -15,5 +15,8 @@
     "nitro": "latest",
     "tsx": "^4.22.4",
     "typescript": "latest"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
   }
 }
