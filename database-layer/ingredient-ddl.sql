@@ -1,6 +1,7 @@
 -- Ingredient table DDL
 -- Adjust data types as needed for your target SQL database.
 
+USE MungDaalCateringInventory;
 CREATE TABLE IF NOT EXISTS Ingredient (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
