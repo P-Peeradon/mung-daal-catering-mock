@@ -1,0 +1,2 @@
+CREATE USER IF NOT EXISTS 'catering_stock_keeper'@'localhost;' IDENTIFIED BY 'o9Nv8P8ENwk=W!iiMGS3fN0Jrduj4QBB%rnG&V^xI-mB+!A0W';
+GRANT ALL PRIVILEGES ON MungDaalCateringInventory.* TO 'catering_stock_keeper'@'localhost;' WITH GRANT OPTION;
