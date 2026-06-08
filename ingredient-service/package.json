@@ -12,6 +12,7 @@
   "devDependencies": {
     "@types/node": "latest",
     "nitro": "latest",
+    "tsx": "^4.22.4",
     "typescript": "latest"
   }
 }
