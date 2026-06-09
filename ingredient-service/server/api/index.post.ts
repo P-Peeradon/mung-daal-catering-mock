@@ -9,6 +9,17 @@ function generateBigIntId(): number {
   return Number("0x" + uuidHex); 
 }
 
+function createIngredient(ingredient: Ingredient): Promise<void> {
+    return new Promise((resolve, reject) => {
+        pool.execute(
+            'INSERT INTO ingredients (id, name, quantity, unit, category) VALUES (?, ?, ?, ?, ?)',
+            [ingredient.id, ingredient.name, ingredient.quantity, ingredient.unit, ingredient.category]
+        )
+        .then(() => resolve())
+        .catch((error) => reject(error));
+    });
+}
+
 export default defineHandler(async (event: H3Event) => {
     const body = await event.req.json();
     const parsedBody: ZodSafeParseResult<z.infer<typeof IngredientBaseSchema>> = IngredientBaseSchema.safeParse(body);
@@ -21,10 +32,7 @@ export default defineHandler(async (event: H3Event) => {
     const newIngredient = { id: generateBigIntId(), ...parsedBody.data};
     const ingredientObject: Ingredient = new Ingredient(newIngredient.id, newIngredient.name, newIngredient.quantity, newIngredient.unit, newIngredient.category);
 
-    await pool.execute(
-        'INSERT INTO ingredients (id, name, quantity, unit, category) VALUES (?, ?, ?, ?, ?)',
-        [ingredientObject.id, ingredientObject.name, ingredientObject.quantity, ingredientObject.unit, ingredientObject.category]
-    );
+    await createIngredient(ingredientObject);
 
     event.res.status = 201; // Set status code to 201 Created
     return { 
