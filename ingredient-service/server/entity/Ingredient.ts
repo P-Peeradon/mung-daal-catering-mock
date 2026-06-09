@@ -2,10 +2,10 @@ class Ingredient implements Ingredient_Interface {
     private _id: number;
     private _name: string;
     private _quantity: number;
-    private _unit: string;
+    private _unit: string | null;
     private _category: string;
 
-    constructor(id: number, name: string, quantity: number, unit: string, category: string) {
+    constructor(id: number, name: string, quantity: number, unit: string | null, category: string) {
         this._id = id;
         this._name = name;
         this._quantity = quantity;
@@ -37,11 +37,11 @@ class Ingredient implements Ingredient_Interface {
         this._quantity = value;
     }
 
-    get unit(): string {
+    get unit(): string | null {
         return this._unit;
     }
 
-    set unit(value: string) {
+    set unit(value: string | null) {
         this._unit = value;
     }
 
@@ -58,7 +58,7 @@ interface Ingredient_Interface {
     id: number;
     name: string;
     quantity: number;
-    unit: string;
+    unit: string | null;
     category: string;
 }
 
