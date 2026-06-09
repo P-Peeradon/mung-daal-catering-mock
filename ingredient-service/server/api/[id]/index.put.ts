@@ -9,6 +9,18 @@ const IngredientUpdateSchema = IngredientBaseSchema.partial().refine(
     { message: 'At least one ingredient attribute is required for update' }
 );
 
+function updateIngredient(id: string, updateData: Partial<Ingredient>): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const assignments = Object.entries(updateData).map(([key]) => `\`${key}\` = ?`).join(', ');
+        const values = Object.values(updateData); 
+        const updateQuery = `UPDATE ingredients SET ${assignments} WHERE id = ?`;
+
+        pool.execute<ResultSetHeader>(updateQuery, [...values, id])
+            .then(() => resolve())
+            .catch((error) => reject(error));
+    });
+}
+
 export default defineHandler(async (event: H3Event) => {
     const id: string | undefined = event.context.params?.id;
 
@@ -25,34 +37,8 @@ export default defineHandler(async (event: H3Event) => {
         return { message: 'Invalid update payload', errors: parsedBody.error };
     }
 
-    const updateData = Object.entries(parsedBody.data).filter(([, value]) => value !== undefined);
+    await updateIngredient(id, parsedBody.data);
 
-    if (updateData.length === 0) {
-        event.res.status = 422;
-        return { message: 'Invalid update payload', errors: 'No valid update attributes provided' };
-    }
-
-    const assignments = updateData.map(([key]) => `\`${key}\` = ?`).join(', ');
-    const values = updateData.map(([, value]) => value as string | number | null);
-
-    const updateQuery = `UPDATE ingredients SET ${assignments} WHERE id = ?`;
-    const [result] = await pool.execute<ResultSetHeader>(updateQuery, [...values, id]);
-
-    if (result.affectedRows === 0) {
-        event.res.status = 404;
-        return { error: 'Ingredient not found' };
-    }
-
-    const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM ingredients WHERE id = ?', [id]);
-    const updatedRow = rows[0];
-
-    if (!updatedRow) {
-        event.res.status = 404;
-        return { error: 'Ingredient not found after update' };
-    }
-
-    return {
-        message: 'Ingredient updated successfully',
-        data: new Ingredient(updatedRow.id, updatedRow.name, updatedRow.quantity, updatedRow.unit, updatedRow.category)
-    };
+    event.res.status = 204;
+    return;
 });

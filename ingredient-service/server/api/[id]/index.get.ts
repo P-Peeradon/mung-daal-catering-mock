@@ -3,9 +3,12 @@ import pool from '../../database';
 import type { RowDataPacket, FieldPacket } from 'mysql2';
 import Ingredient from '#server/entity/Ingredient.ts';
 
-async function findIngredientById(id: string) {
-    const [rows, _fields]: [RowDataPacket[], FieldPacket[]] = await pool.execute<RowDataPacket[]>('SELECT * FROM ingredients WHERE id = ?', [id]);
-    return rows[0] ?? null;
+function findIngredientById(id: string): Promise<RowDataPacket | null> {
+    return new Promise((resolve, reject) => {
+        pool.execute<RowDataPacket[]>('SELECT * FROM ingredients WHERE id = ?', [id])
+            .then(([rows, _fields]: [RowDataPacket[], FieldPacket[]]) => resolve(rows[0] ?? null))
+            .catch((error) => reject(error));
+    });
 }
 
 export default defineHandler(async (event: H3Event) => {
