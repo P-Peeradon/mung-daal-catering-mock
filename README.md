@@ -7,8 +7,9 @@ A mock catering management project inspired by the animated series *Chowder*. Th
 This workspace contains:
 
 - `ingredient-service/` — a Nitro-based TypeScript API service for managing catering ingredients.
-- `database-layer/` — SQL files for creating the MySQL database and ingredient table.
-- `menu-service/` — a placeholder folder for the future menu management service.
+- `menu-service/` — a Nitro-based TypeScript API service for managing menu items.
+- `database-layer/` — SQL files for creating the MySQL database and ingredient/menu tables.
+- `unit-test-utility/` — a custom Jest reporter that writes test results to `test-results.txt`.
 
 ## Stack
 
@@ -19,7 +20,12 @@ This workspace contains:
 
 ## Architecture
 
-The current implementation centers on the `ingredient-service`, which exposes a simple ingredients CRUD API backed by a MySQL connection pool. Ingredient data is stored in a `Ingredient` table inside the `MungDaalCateringInventory` database.
+The workspace includes two Nitro API services:
+
+- `ingredient-service/` handles ingredient inventory CRUD operations.
+- `menu-service/` handles menu item CRUD operations.
+
+Both services use MySQL via the `mysql2` driver and validate request payloads with `zod`. Ingredient data is stored in an `Ingredient` table inside the `MungDaalCateringInventory` database, while the menu service maintains a `menu` table.
 
 ## Getting Started
 
@@ -66,6 +72,22 @@ npm run dev
 ```
 
 The API will start on the Nitro development server, typically at `http://localhost:3000`.
+
+## Running Tests
+
+Each service includes a Jest test suite and a custom report writer that outputs `test-results.txt`.
+
+```bash
+cd ingredient-service
+npm install
+npm test
+
+cd ../menu-service
+npm install
+npm test
+```
+
+After test execution, check `ingredient-service/test-results.txt` and `menu-service/test-results.txt` for the automated summary output.
 
 ## Ingredient Service API
 
@@ -136,6 +158,10 @@ Success response:
 
 - Status: `204 No Content`
 
+## Menu Service
+
+The `menu-service/` mirrors the ingredient service with CRUD operations for menu items. It also uses a Nitro server, MySQL, and `zod` validation. Menu service tests are available under `menu-service/tests/`.
+
 ## Data Model
 
 The ingredient model includes:
@@ -148,9 +174,10 @@ The ingredient model includes:
 
 ## Notes
 
-- The service uses `zod` validation to enforce ingredient payloads on create and update operations.
-- `ingredient-service/` is built as a Nitro app with server code under `server/`.
-- `menu-service/` is currently empty and reserved for future menu management functionality.
+- Both services use `zod` validation to enforce request payloads.
+- `ingredient-service/` and `menu-service/` are Nitro apps with server code under `server/`.
+- Both services include Jest test suites and write summary results to `test-results.txt`.
+- `unit-test-utility/txt-reporter.js` is used to format test results into a readable text report.
 
 ## Future Work
 
