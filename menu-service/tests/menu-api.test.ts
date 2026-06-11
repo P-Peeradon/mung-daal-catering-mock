@@ -1,13 +1,15 @@
 import { jest, describe, it, expect, beforeEach } from '@jest/globals';
 
+const mockExecute = jest.fn();
+const mockDb = {
+  __esModule: true,
+  default: {
+    execute: mockExecute
+  }
+};
+
 // 1. Mock the database pool module before importing handlers
-jest.mock('#server/database.ts', () => {
-  return {
-    default: {
-      execute: jest.fn()
-    }
-  };
-});
+jest.mock('#server/database.ts', () => mockDb);
 
 // Mock the nitro package to avoid ESM runtime issues when importing handlers
 jest.mock('nitro', () => {
@@ -16,15 +18,12 @@ jest.mock('nitro', () => {
   };
 });
 
-// Import pool and handlers
-import pool from '#server/database.ts';
+// Import handlers after mocking
 import getMenusHandler from '#server/api/index.get.ts';
 import createMenuHandler from '#server/api/index.post.ts';
 import getMenuByIdHandler from '#server/api/[id]/index.get.ts';
 import updateMenuHandler from '#server/api/[id]/index.put.ts';
 import deleteMenuHandler from '#server/api/[id]/index.delete.ts';
-
-const mockExecute = pool.execute as jest.Mock;
 
 describe('Menu API Handlers - 20 Test Cases', () => {
   beforeEach(() => {

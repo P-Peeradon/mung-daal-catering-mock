@@ -3,14 +3,14 @@ import { jest, describe, it, expect, beforeEach } from '@jest/globals';
 // 1. Mock the database pool module for all relative and path-mapped import forms
 const mockExecute = jest.fn();
 const mockDb = {
+  __esModule: true,
   default: {
     execute: mockExecute
   }
 };
 
 jest.mock('#server/database.ts', () => mockDb);
-jest.mock('../database', () => mockDb);
-jest.mock('../../database', () => mockDb);
+jest.mock('../server/database.ts', () => mockDb);
 
 // Mock the nitro package to avoid ESM runtime issues when importing handlers
 jest.mock('nitro', () => {

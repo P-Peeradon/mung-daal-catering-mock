@@ -1,0 +1,116 @@
+Test Run Summary
+================
+Total Tests: 100
+Passed: 100
+Failed: 0
+Time: 1.442s
+
+Suite: tests\ingredient-api.test.ts
+--------------------------------------------------------------------------
+  [PASSED] 1. should return a list of ingredients with status 200
+  [PASSED] 2. should return empty list if no ingredients in DB
+  [PASSED] 3. should throw error if DB query fails
+  [PASSED] 4. should verify response data structure is correct
+  [PASSED] 5. should create ingredient successfully and return 201
+  [PASSED] 6. should return 422 if body name validation fails (too short)
+  [PASSED] 7. should return 422 if quantity is negative
+  [PASSED] 8. should propagate error if DB insert fails
+  [PASSED] 9. should ensure createIngredient query matches values
+  [PASSED] 10. should return ingredient data if found in DB
+  [PASSED] 11. should return 404 error if ingredient not found
+  [PASSED] 12. should return 400 error if ID parameter is missing
+  [PASSED] 13. should throw error if select query fails
+  [PASSED] 14. should update ingredient and return status 204 on success
+  [PASSED] 15. should return 422 if update body has invalid attributes
+  [PASSED] 16. should return 400 if ID is missing during update
+  [PASSED] 17. should propagate error if update query fails
+  [PASSED] 18. should delete ingredient and return 204 on success
+  [PASSED] 19. should return 400 if ID is missing during delete
+  [PASSED] 20. should propagate error if delete query fails
+
+Suite: tests\ingredient-schema.test.ts
+-----------------------------------------------------------------------------
+  [PASSED] 1. should validate: standard valid payload
+  [PASSED] 2. should validate: float quantity
+  [PASSED] 3. should validate: null unit
+  [PASSED] 4. should validate: zero quantity
+  [PASSED] 5. should validate: large quantity
+  [PASSED] 6. should validate: longest valid name (70 chars)
+  [PASSED] 7. should validate: shortest valid name (2 chars)
+  [PASSED] 8. should validate: longest valid unit (20 chars)
+  [PASSED] 9. should validate: empty unit
+  [PASSED] 10. should validate: longest valid category (20 chars)
+  [PASSED] 11. should validate: tiny float quantity
+  [PASSED] 12. should validate: category and unit with spaces
+  [PASSED] 13. should validate: special chars in fields
+  [PASSED] 14. should validate: dry goods category
+  [PASSED] 15. should validate: countable items
+  [PASSED] 16. should validate: produce category
+  [PASSED] 17. should validate: pound unit
+  [PASSED] 18. should validate: meat category
+  [PASSED] 19. should validate: seafood category
+  [PASSED] 20. should validate: grains category
+  [PASSED] 21. should validate: packets unit
+  [PASSED] 22. should validate: extracts category
+  [PASSED] 23. should validate: block unit
+  [PASSED] 24. should validate: herbs category
+  [PASSED] 25. should validate: juice category
+  [PASSED] 26. should fail validation: empty object
+  [PASSED] 27. should fail validation: missing name
+  [PASSED] 28. should fail validation: missing quantity
+  [PASSED] 29. should fail validation: missing category
+  [PASSED] 30. should fail validation: name too short (1 char)
+  [PASSED] 31. should fail validation: name too short (0 chars)
+  [PASSED] 32. should fail validation: name too long (71 chars)
+  [PASSED] 33. should fail validation: name is number
+  [PASSED] 34. should fail validation: name is boolean
+  [PASSED] 35. should fail validation: name is array
+  [PASSED] 36. should fail validation: name is object
+  [PASSED] 37. should fail validation: name is null
+  [PASSED] 38. should fail validation: quantity is negative float
+  [PASSED] 39. should fail validation: quantity is negative integer
+  [PASSED] 40. should fail validation: quantity is string
+  [PASSED] 41. should fail validation: quantity is boolean
+  [PASSED] 42. should fail validation: quantity is null
+  [PASSED] 43. should fail validation: unit too long (21 chars)
+  [PASSED] 44. should fail validation: unit is number
+  [PASSED] 45. should fail validation: unit is object
+  [PASSED] 46. should fail validation: category too long (21 chars)
+  [PASSED] 47. should fail validation: category is number
+  [PASSED] 48. should fail validation: category is boolean
+  [PASSED] 49. should fail validation: category is null
+  [PASSED] 50. should fail validation: all fields invalid
+
+Suite: tests\ingredient-entity.test.ts
+-----------------------------------------------------------------------------
+  [PASSED] 1. should instantiate with standard valid values
+  [PASSED] 2. should instantiate with null unit
+  [PASSED] 3. should instantiate with empty string unit
+  [PASSED] 4. should instantiate with zero quantity
+  [PASSED] 5. should instantiate with large ID
+  [PASSED] 6. should instantiate with negative ID
+  [PASSED] 7. should instantiate with negative quantity
+  [PASSED] 8. should instantiate with name containing special characters
+  [PASSED] 9. should instantiate with category containing special characters
+  [PASSED] 10. should instantiate with a float quantity value
+  [PASSED] 11. should return correct id
+  [PASSED] 12. should return correct name
+  [PASSED] 13. should return correct quantity
+  [PASSED] 14. should return correct unit
+  [PASSED] 15. should return correct category
+  [PASSED] 16. should return null unit via getter if set to null
+  [PASSED] 17. should return correct values for custom entity 1
+  [PASSED] 18. should return correct values for custom entity 2
+  [PASSED] 19. should return correct values for custom entity 3
+  [PASSED] 20. should return correct values for custom entity 4
+  [PASSED] 21. should update id
+  [PASSED] 22. should update name
+  [PASSED] 23. should update quantity to integer
+  [PASSED] 24. should update quantity to float
+  [PASSED] 25. should update quantity to zero
+  [PASSED] 26. should update unit to string
+  [PASSED] 27. should update unit to null
+  [PASSED] 28. should update category
+  [PASSED] 29. should perform chained updates successfully
+  [PASSED] 30. should update quantity to negative number
+
