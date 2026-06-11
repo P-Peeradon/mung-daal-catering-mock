@@ -15,5 +15,9 @@
     "@types/node": "latest",
     "nitro": "latest",
     "typescript": "latest"
+  },
+  "dependencies": {
+    "mysql2": "^3.22.5",
+    "zod": "^4.4.3"
   }
 }
