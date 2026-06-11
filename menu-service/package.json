@@ -1,0 +1,19 @@
+{
+  "name": "menu-service",
+  "version": "1.0.0",
+  "description": "Menu Service for Mung Daal Catering",
+  "type": "module",
+  "scripts": {
+    "build": "nitro build",
+    "dev": "nitro dev",
+    "preview": "nitro preview"
+  },
+  "imports": {
+    "#*": "./*"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "nitro": "latest",
+    "typescript": "latest"
+  }
+}
