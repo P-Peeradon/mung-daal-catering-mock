@@ -1,17 +1,17 @@
 class Menu implements Menu_Interface {
-    _id: string;
+    _id: number;
     _name: string;
     _description: string | null;
     _price: number;
 
-    constructor(id: string, name: string, description: string | null, price: number) {
+    constructor(id: number, name: string, description: string | null, price: number) {
         this._id = id;
         this._name = name;
         this._description = description;
         this._price = price;
     }
 
-    get id(): string {
+    get id(): number {
         return this._id;
     }
 
@@ -50,7 +50,7 @@ class Menu implements Menu_Interface {
 }
 
 interface Menu_Interface {
-    readonly id: string;
+    readonly id: number;
     name: string;
     description: string | null;
     price: number;
