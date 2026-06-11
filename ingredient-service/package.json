@@ -4,15 +4,19 @@
   "scripts": {
     "build": "nitro build",
     "dev": "nitro dev",
-    "preview": "nitro preview"
+    "preview": "nitro preview",
+    "test": "jest"
   },
   "imports": {
     "#*": "./*"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "latest",
+    "jest": "^30.4.2",
     "jiti": "^2.7.0",
     "nitro": "latest",
+    "ts-jest": "^29.4.11",
     "tsx": "^4.22.4",
     "typescript": "latest"
   },
