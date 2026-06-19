@@ -2,7 +2,7 @@ import Consul from 'consul';
 import { ServiceConfig, HealthCheckConfig } from './config';
 import type { RegisterOptions } from 'consul/lib/agent/service';
 
-interface ServiceInstance {
+export interface ServiceInstance {
   id: string;
   name: string;
   address: string;
